@@ -1,9 +1,13 @@
 const express = require("express");
 const { chats } = require("./data/data.js");
 const dotenv = require("dotenv");
+const { connect } = require("mongoose");
+const connectDB = require("./config/db.js");
+const colors = require("colors");
 
-const app = express();
 dotenv.config();
+connectDB();
+const app = express();
 
 app.get("/", (req, res) => {
   res.send("API running.");
@@ -21,4 +25,4 @@ app.get("/api/chat/:id", (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, console.log(`server started on Port ${PORT}`));
+app.listen(PORT, console.log(`server started on Port ${PORT}`.yellow.bold));
